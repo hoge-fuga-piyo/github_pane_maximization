@@ -16,5 +16,16 @@
         "src/content/content.js"
       ]
     }
+  ],
+  "background": {
+    "scripts": [
+      "src/3rdparty/jquery-3.4.1.min.js", 
+      "src/background/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "https://github.com/*"
   ]
 }
