@@ -9,8 +9,6 @@ function isMaximization() {
 
 function paneMaximization() {
   if ($('div').hasClass('repository-content')) {
-    console.log("has repository-content");
-
     // ソースコード表示
     codePaneMaximization();
 
@@ -21,7 +19,6 @@ function paneMaximization() {
 
 function paneDefault() {
   if ($('div').hasClass('repository-content')) {
-    console.log("has repository-content");
     codePaneDefault();
     prDiffPaneDefault();
   }
@@ -41,25 +38,28 @@ function codePaneDefault() {
 }
 
 function prDiffPaneMaximization() {
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-left', '2%');
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-right', '2%');
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('max-width', '100%');
+  let viewMode = $("meta[name='diff-view']").attr('content');
+  if (viewMode !== 'split') {
+    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-left', '2%');
+    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-right', '2%');
+    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('max-width', '100%');
+  }
 }
 
 function prDiffPaneDefault() {
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-left', 'auto');
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-right', 'auto');
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('max-width', '1012px');
+  let viewMode = $("meta[name='diff-view']").attr('content');
+  if (viewMode !== 'split') {
+    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-left', 'auto');
+    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-right', 'auto');
+    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('max-width', '1012px');
+  }
 }
 
 function runScript() {
   isMaximization().then(isMaximization => {
-    console.log(isMaximization);
     if (isMaximization === false) {
-      console.log('pane default')
       paneDefault();
     } else {
-      console.log('pane max')
       paneMaximization();
     }
   })
