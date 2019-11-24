@@ -9,11 +9,12 @@ function showTargetUrls() {
 
       appendUrlToLast(key);
     }
+    declareRemoveButton();
   });
 }
 
 function createUrlStyle(url) {
-  return '<tr><td>' + decodeURIComponent(url) + '</td></tr>';
+  return '<tr><td><span>' + decodeURIComponent(url) + '</span></td><td>' + '<button type="button" class="btn btn-primary rounded-circle p-0 removeButton" style="width:2rem;height:2rem;">-</button>' + '</td></tr>';
 }
 
 function appendUrlToLast(url) {
@@ -28,6 +29,7 @@ async function addUrl(url) {
     console.log('does not have url');
     chrome.storage.local.set({[url] : true}, () => {
       appendUrlToLast(url);
+      declareRemoveButton();
     });
   } else {
     console.log('has url');
@@ -47,9 +49,19 @@ function hasUrl(url) {
   });
 }
 
-$('#addButton').on('click',function(){
+function declareRemoveButton() {
+  $('.removeButton').on('click', function() {
+    console.log($(this).parent().prev().children('span').text());
+    
+    let url = $(this).parent().prev().children('span').text();
+    chrome.storage.local.remove(url, function(){});
+    $(this).parent().prev().parent().remove();
+  });
+}
+
+showTargetUrls();
+
+$('.addButton').on('click', () => {
   let newUrl = $('#newUrl').val();
   addUrl(newUrl);
 });
-
-showTargetUrls();
