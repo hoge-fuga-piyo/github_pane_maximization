@@ -1,4 +1,4 @@
-// SPA対応
+// SPAサイトでURLの変更を検知
 chrome.tabs.onUpdated.addListener(function(tabId, info, tab){
   if(info.status === 'complete' && tab.url.indexOf("https://github.com/") > -1) {
     chrome.tabs.executeScript(

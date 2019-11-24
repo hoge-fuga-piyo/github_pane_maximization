@@ -65,7 +65,7 @@ function runScript() {
   })
 }
 
-// 拡張機能ボタンが押された時の挙動
+// アイコンクリック時の挙動
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     if (request == "runScript") {
         runScript();
