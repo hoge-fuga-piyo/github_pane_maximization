@@ -15,11 +15,11 @@ function showTargetUrls() {
 
 function createUrlStyle(url) {
   return '<div class="row">' +
-            '<div class="col-sm-11">' +
+            '<div class="col-11">' +
               '<span>' + decodeURIComponent(url) + '</span>' +
             '</div>' +
-            '<div class="col-sm-1">' +
-              '<button type="button" class="btn btn-primary rounded-circle p-0 removeButton" style="width:2rem;height:2rem;">-</button>' +
+            '<div class="col-1">' +
+              '<button type="button" class="btn btn-dark rounded-circle p-0 removeButton" style="width:1.8rem;height:1.8rem;">-</button>' +
             '</div>' +
           '</div>';
 }
