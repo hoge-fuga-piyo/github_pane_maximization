@@ -30,6 +30,10 @@ function appendUrlToLast(url) {
 }
 
 async function addUrl(url) {
+  if (url === '') {
+    return;
+  }
+
   const alreadyHasUrl = await hasUrl(url);
   console.log(alreadyHasUrl);
   if (!alreadyHasUrl ) {
