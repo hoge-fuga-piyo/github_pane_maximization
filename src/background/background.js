@@ -32,5 +32,18 @@ function monitorIconClick() {
   });
 }
 
+// content scriptにURLを返す用
+chrome.runtime.onMessage.addListener(
+  (message, sender, callback) => {
+  if (message.type === 'currentPageUrl') {
+    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, tabs => {
+      const url = tabs[0].url;
+      callback(url);
+    });
+
+    return true;
+  }
+});
+
 updatedDetect();
 monitorIconClick();
