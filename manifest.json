@@ -7,7 +7,7 @@
     "default_icon": "img/icon.png"
   },
   "icons": {
-    "16": "img/icon.png"
+    "48": "img/icon.png"
   },
   "content_scripts": [
     {
