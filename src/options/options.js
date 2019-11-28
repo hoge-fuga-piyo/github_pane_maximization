@@ -70,9 +70,19 @@ function declareRemoveButton() {
   });
 }
 
+// ローカルストレージからURL一覧を取得して表示
 showTargetUrls();
 
+// "+"ボタンが押されたとき
 $('.addButton').on('click', () => {
   let newUrl = $('#newUrl').val();
   addUrl(newUrl);
 });
+
+// テキストボックスでエンターが押されたとき
+$('#newUrl').keypress(function(e) {
+  if (e.which === 13) {
+    $('.addButton').click();
+    $('#newUrl').val('');
+  }
+})
