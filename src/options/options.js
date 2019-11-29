@@ -14,9 +14,9 @@ function showTargetUrls() {
 }
 
 function createUrlStyle(url) {
-  return '<div class="row">' +
+  return '<div class="row mt-2">' +
             '<div class="col-11">' +
-              '<span>' + decodeURIComponent(url) + '</span>' +
+              '<span class="url">' + decodeURIComponent(url) + '</span>' +
             '</div>' +
             '<div class="col-1">' +
               '<button type="button" class="btn btn-dark rounded-circle p-0 removeButton" style="width:1.8rem;height:1.8rem;">-</button>' +
@@ -26,7 +26,7 @@ function createUrlStyle(url) {
 
 function appendUrlToLast(url) {
   let content = createUrlStyle(url);
-  $(content).appendTo('#urls');
+  $(content).appendTo('#url-list');
 }
 
 async function addUrl(url) {
