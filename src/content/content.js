@@ -9,15 +9,26 @@ function isMaximization() {
 
 function paneMaximization() {
   if ($('div').hasClass('repository-content')) {
+    let viewMode = $("meta[name='diff-view']").attr('content');
+    if (viewMode === 'split') {
+      return;
+    }
+
     $('div.repository-content').parent().css('margin-left', '2%');
     $('div.repository-content').parent().css('margin-right', '2%');
     $('div.repository-content').parent().css('max-width', '100%');
+    $('div.repository-content').parent().css('width', 'auto');
     $('div.repository-content').width('auto');
   }
 }
 
 function paneDefault() {
   if ($('div').hasClass('repository-content')) {
+    let viewMode = $("meta[name='diff-view']").attr('content');
+    if (viewMode === 'split') {
+      return;
+    }
+
     $('div.repository-content').parent().css('margin-left', 'auto');
     $('div.repository-content').parent().css('margin-right', 'auto');
     $('div.repository-content').parent().css('max-width', '1012px');
