@@ -9,49 +9,17 @@ function isMaximization() {
 
 function paneMaximization() {
   if ($('div').hasClass('repository-content')) {
-    // ソースコード表示
-    codePaneMaximization();
-
-    // PRのdiff表示
-    prDiffPaneMaximization();
+    $('div.repository-content').parent().css('margin-left', '2%');
+    $('div.repository-content').parent().css('margin-right', '2%');
+    $('div.repository-content').parent().css('max-width', '100%');
   }
 }
 
 function paneDefault() {
   if ($('div').hasClass('repository-content')) {
-    codePaneDefault();
-    prDiffPaneDefault();
-  }
-}
-
-function codePaneMaximization() {
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.p-responsive').css('margin-left', '2%');
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.p-responsive').css('margin-right', '2%');
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.p-responsive').css('max-width', '100%');
-  $('div.repository-content').width('auto');
-}
-
-function codePaneDefault() {
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.p-responsive').css('margin-left', 'auto');
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.p-responsive').css('margin-right', 'auto');
-  $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.p-responsive').css('max-width', '1012px');
-}
-
-function prDiffPaneMaximization() {
-  let viewMode = $("meta[name='diff-view']").attr('content');
-  if (viewMode !== 'split') {
-    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-left', '2%');
-    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-right', '2%');
-    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('max-width', '100%');
-  }
-}
-
-function prDiffPaneDefault() {
-  let viewMode = $("meta[name='diff-view']").attr('content');
-  if (viewMode !== 'split') {
-    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-left', 'auto');
-    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('margin-right', 'auto');
-    $('div.container-lg.clearfix.new-discussion-timeline.experiment-repo-nav.px-3').css('max-width', '1012px');
+    $('div.repository-content').parent().css('margin-left', 'auto');
+    $('div.repository-content').parent().css('margin-right', 'auto');
+    $('div.repository-content').parent().css('max-width', '1012px');
   }
 }
 
