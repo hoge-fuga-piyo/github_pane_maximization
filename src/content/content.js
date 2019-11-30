@@ -12,6 +12,7 @@ function paneMaximization() {
     $('div.repository-content').parent().css('margin-left', '2%');
     $('div.repository-content').parent().css('margin-right', '2%');
     $('div.repository-content').parent().css('max-width', '100%');
+    $('div.repository-content').width('auto');
   }
 }
 
