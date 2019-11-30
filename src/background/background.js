@@ -2,7 +2,6 @@
 function updatedDetect() {
   chrome.tabs.onUpdated.addListener(function(tabId, info, tab){
     localStorage.isForwardMatch(tab.url).then((isTarget) => {
-      console.log(isTarget);
       if (info.status === 'complete' && isTarget) {
         chrome.tabs.executeScript(
           tabId,

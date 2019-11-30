@@ -35,15 +35,11 @@ async function addUrl(url) {
   }
 
   const alreadyHasUrl = await hasUrl(url);
-  console.log(alreadyHasUrl);
   if (!alreadyHasUrl ) {
-    console.log('does not have url');
     chrome.storage.local.set({[url] : true}, () => {
       appendUrlToLast(url);
       declareRemoveButton();
     });
-  } else {
-    console.log('has url');
   }
 }
 
@@ -62,8 +58,6 @@ function hasUrl(url) {
 
 function declareRemoveButton() {
   $('.removeButton').on('click', function() {
-    console.log($(this).parent().prev().children('span').text());
-    
     let url = $(this).parent().prev().children('span').text();
     chrome.storage.local.remove(url, function(){});
     $(this).parent().prev().parent().remove();
