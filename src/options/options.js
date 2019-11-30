@@ -30,7 +30,7 @@ function appendUrlToLast(url) {
 }
 
 async function addUrl(url) {
-  if (url === '') {
+  if (!stringUtil.isUrl(url)) {
     return;
   }
 
