@@ -1,3 +1,7 @@
 .url {
   overflow-wrap : break-word;
 }
+
+.default-url {
+  height: 1.8rem;
+}

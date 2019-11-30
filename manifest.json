@@ -17,6 +17,7 @@
       "js": [
         "src/3rdparty/jquery-3.4.1.min.js", 
         "src/lib/localStorage.js",
+        "src/lib/defaultUrl.js",
         "src/content/content.js"
       ]
     }
@@ -25,6 +26,7 @@
     "scripts": [
       "src/3rdparty/jquery-3.4.1.min.js", 
       "src/lib/localStorage.js",
+      "src/lib/defaultUrl.js",
       "src/background/background.js"
     ],
     "persistent": false

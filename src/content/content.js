@@ -48,8 +48,9 @@ function runScript() {
 chrome.runtime.sendMessage({type: 'currentPageUrl'}, (response) => {
   const url = response; // 現在のタブのURLを取得
 
+  const isDefaultTarget = defaultUrl.isDefaultUrl(url);
   localStorage.isForwardMatch(url).then((isTarget) => {
-    if (isTarget) {
+    if (isTarget || isDefaultTarget) {
 
       // アイコンクリック時の挙動
       chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {

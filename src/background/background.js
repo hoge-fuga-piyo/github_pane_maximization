@@ -2,7 +2,8 @@
 function updatedDetect() {
   chrome.tabs.onUpdated.addListener(function(tabId, info, tab){
     localStorage.isForwardMatch(tab.url).then((isTarget) => {
-      if (info.status === 'complete' && isTarget) {
+      const isDefaultTarget = defaultUrl.isDefaultUrl(tab.url);
+      if (info.status === 'complete' && (isTarget || isDefaultTarget)) {
         chrome.tabs.executeScript(
           tabId,
           {
@@ -18,7 +19,8 @@ function updatedDetect() {
 function monitorIconClick() {
   chrome.browserAction.onClicked.addListener(function (tab) {
     localStorage.isForwardMatch(tab.url).then((isTarget) => {
-      if (isTarget) {
+      const isDefaultTarget = defaultUrl.isDefaultUrl(tab.url);
+      if (isTarget || isDefaultTarget) {
         const key = "isMaximization";
         chrome.storage.local.get([key], (value) => {
           let isMaximization = typeof value[key] === 'undefined' ? true : value[key];

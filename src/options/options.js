@@ -14,7 +14,7 @@ function showTargetUrls() {
 }
 
 function createUrlStyle(url) {
-  return '<div class="row mt-2">' +
+  return '<div class="row mt-1">' +
             '<div class="col-11">' +
               '<span class="url">' + decodeURIComponent(url) + '</span>' +
             '</div>' +
