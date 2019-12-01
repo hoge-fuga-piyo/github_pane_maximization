@@ -1,6 +1,6 @@
 {
-  "name": "GitHub Pane Maximize",
-  "description" : "GitHub Pane Maximize",
+  "name": "GitHub Pane Maximization",
+  "description" : "GitHub Pane Maximization",
   "version": "1.0",
   "manifest_version": 2,
   "browser_action": {
