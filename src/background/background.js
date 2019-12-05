@@ -13,6 +13,7 @@ function updatedDetect() {
                   file: "src/content/content.js",
                 },
                 () => { 
+                  chrome.runtime.lastError;
                 }
               );
             });
