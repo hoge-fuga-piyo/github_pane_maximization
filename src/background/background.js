@@ -1,26 +1,24 @@
 // SPAサイトでURLの変更を検知
 function updatedDetect() {
   chrome.tabs.onUpdated.addListener(function(tabId, info, tab){
-    localStorage.isForwardMatch(tab.url).then((isTarget) => {
-      const isDefaultTarget = defaultUrl.isDefaultUrl(tab.url);
-      if (info.status === 'complete' && (isTarget || isDefaultTarget)) {
-        chrome.tabs.executeScript(null, { file: "src/3rdparty/jquery-3.4.1.min.js" }, () => {
-          chrome.tabs.executeScript(null, { file: "src/lib/defaultUrl.js" } , () => {
-            chrome.tabs.executeScript(null, { file: "src/lib/localStorage.js" }, () => {
-              chrome.tabs.executeScript(
-                tabId,
-                {
-                  file: "src/content/content.js",
-                },
-                () => { 
-                  chrome.runtime.lastError;
-                }
-              );
-            });
+    const isDefaultTarget = defaultUrl.isDefaultUrl(tab.url);
+    if (info.status === 'complete' && isDefaultTarget) {
+      chrome.tabs.executeScript(null, { file: "src/3rdparty/jquery-3.4.1.min.js" }, () => {
+        chrome.tabs.executeScript(null, { file: "src/lib/defaultUrl.js" } , () => {
+          chrome.tabs.executeScript(null, { file: "src/lib/localStorage.js" }, () => {
+            chrome.tabs.executeScript(
+              tabId,
+              {
+                file: "src/content/content.js",
+              },
+              () => { 
+                chrome.runtime.lastError;
+              }
+            );
           });
         });
-      }
-    });
+      });
+    }
   });
 }
 
