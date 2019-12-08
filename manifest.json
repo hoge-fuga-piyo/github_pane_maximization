@@ -20,10 +20,6 @@
     ],
     "persistent": false
   },
-  "options_ui": {
-    "page": "src/options/options.html",
-    "open_in_tab": true
-  },
   "permissions": [
     "tabs",
     "https://*/blob/*",
