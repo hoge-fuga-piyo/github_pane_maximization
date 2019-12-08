@@ -45,19 +45,13 @@ function runScript() {
   })
 }
 
-chrome.runtime.sendMessage({type: 'currentPageUrl'}, (response) => {
-  const url = response; // 現在のタブのURLを取得
+// アイコンクリック時の挙動
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request == "runScript") {
+        runScript();
+    }
+}); 
 
-  const isTargetUrl = targetUrl.isTarget(url);
-  if (isTargetUrl) {
-
-    // アイコンクリック時の挙動
-    chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-        if (request == "runScript") {
-            runScript();
-        }
-    }); 
-    // Paneの最大化/デフォルト切り替え
-    runScript();
-  }
-});
+// Paneの最大化/デフォルト切り替え
+runScript();
+ 
