@@ -1,20 +1,28 @@
+// 対象URLの判定
+function isTargetUrl(url) {
+  const blobPattern = /https:\/\/github.com\/.*\/blob\/.*/;
+  const pullPattern = /https:\/\/github.com\/.*\/pull\/.*/;
+  const comparePattern = /https:\/\/github.com\/.*\/compare\/.*/;
+  if (blobPattern.test(url) || pullPattern.test(url) || comparePattern.test(url)) {
+    return true;
+  }
+  return false;
+}
+
 // SPAサイトでURLの変更を検知
 function updatedDetect() {
   chrome.tabs.onUpdated.addListener(function(tabId, info, tab) {
-    const isTargetUrl = targetUrl.isTarget(tab.url);
-    if (info.status === 'complete' && isTargetUrl) {
+    if (info.status === 'complete' && isTargetUrl(tab.url)) {
       chrome.tabs.executeScript(null, { file: "src/3rdparty/jquery-3.4.1.min.js" }, () => {
-        chrome.tabs.executeScript(null, { file: "src/lib/targetUrl.js" } , () => {
-          chrome.tabs.executeScript(
-            tabId,
-            {
-              file: "src/content/content.js",
-            },
-            () => { 
-              chrome.runtime.lastError;
-            }
-          );
-        });
+        chrome.tabs.executeScript(
+          tabId,
+          {
+            file: "src/content/content.js",
+          },
+          () => { 
+            chrome.runtime.lastError;
+          }
+        );
       });
     }
   });
@@ -23,8 +31,7 @@ function updatedDetect() {
 // アイコンクリック時の動作
 function monitorIconClick() {
   chrome.browserAction.onClicked.addListener(function (tab) {
-    const isTargetUrl = targetUrl.isTarget(tab.url);
-    if (isTargetUrl) {
+    if (isTargetUrl(tab.url)) {
       const key = "isMaximization";
       chrome.storage.local.get([key], (value) => {
         let isMaximization = typeof value[key] === 'undefined' ? true : value[key];

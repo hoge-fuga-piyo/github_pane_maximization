@@ -14,8 +14,6 @@
   },
   "background": {
     "scripts": [
-      "src/lib/localStorage.js",
-      "src/lib/targetUrl.js",
       "src/background/background.js"
     ],
     "persistent": false
