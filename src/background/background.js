@@ -1,21 +1,19 @@
 // SPAサイトでURLの変更を検知
 function updatedDetect() {
-  chrome.tabs.onUpdated.addListener(function(tabId, info, tab){
-    const isDefaultTarget = defaultUrl.isDefaultUrl(tab.url);
-    if (info.status === 'complete' && isDefaultTarget) {
+  chrome.tabs.onUpdated.addListener(function(tabId, info, tab) {
+    const isTargetUrl = targetUrl.isTarget(tab.url);
+    if (info.status === 'complete' && isTargetUrl) {
       chrome.tabs.executeScript(null, { file: "src/3rdparty/jquery-3.4.1.min.js" }, () => {
-        chrome.tabs.executeScript(null, { file: "src/lib/defaultUrl.js" } , () => {
-          chrome.tabs.executeScript(null, { file: "src/lib/localStorage.js" }, () => {
-            chrome.tabs.executeScript(
-              tabId,
-              {
-                file: "src/content/content.js",
-              },
-              () => { 
-                chrome.runtime.lastError;
-              }
-            );
-          });
+        chrome.tabs.executeScript(null, { file: "src/lib/targetUrl.js" } , () => {
+          chrome.tabs.executeScript(
+            tabId,
+            {
+              file: "src/content/content.js",
+            },
+            () => { 
+              chrome.runtime.lastError;
+            }
+          );
         });
       });
     }
@@ -25,18 +23,16 @@ function updatedDetect() {
 // アイコンクリック時の動作
 function monitorIconClick() {
   chrome.browserAction.onClicked.addListener(function (tab) {
-    localStorage.isForwardMatch(tab.url).then((isTarget) => {
-      const isDefaultTarget = defaultUrl.isDefaultUrl(tab.url);
-      if (isTarget || isDefaultTarget) {
-        const key = "isMaximization";
-        chrome.storage.local.get([key], (value) => {
-          let isMaximization = typeof value[key] === 'undefined' ? true : value[key];
-          chrome.storage.local.set({[key] : !isMaximization}, function() {
-            chrome.tabs.sendMessage(tab.id, 'runScript');
-          });
+    const isTargetUrl = targetUrl.isTarget(tab.url);
+    if (isTargetUrl) {
+      const key = "isMaximization";
+      chrome.storage.local.get([key], (value) => {
+        let isMaximization = typeof value[key] === 'undefined' ? true : value[key];
+        chrome.storage.local.set({[key] : !isMaximization}, function() {
+          chrome.tabs.sendMessage(tab.id, 'runScript');
         });
-      }
-    });
+      });
+    }
   });
 }
 

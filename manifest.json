@@ -1,7 +1,7 @@
 {
   "name": "GitHub Pane Maximization",
   "description" : "GitHub Pane Maximization",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 2,
   "browser_action": {
     "default_icon": "img/icon16.png"
@@ -15,7 +15,7 @@
   "background": {
     "scripts": [
       "src/lib/localStorage.js",
-      "src/lib/defaultUrl.js",
+      "src/lib/targetUrl.js",
       "src/background/background.js"
     ],
     "persistent": false
