@@ -1,11 +1,39 @@
-// 対象URLの判定
-function isTargetUrl(url) {
-  const blobPattern = /https:\/\/github.com\/.*\/blob\/.*/;
-  const pullPattern = /https:\/\/github.com\/.*\/pull\/.*/;
-  const comparePattern = /https:\/\/github.com\/.*\/compare\/.*/;
-  if (blobPattern.test(url) || pullPattern.test(url) || comparePattern.test(url)) {
+function isBlobUrl(url) {
+  const blobPattern = /https:\/\/.*\/.*\/blob\/.*/;
+  if (blobPattern.test(url)) {
     return true;
   }
+
+  return false;
+}
+
+function isPullUrl(url) {
+  const pullPattern = /https:\/\/.*\/.*\/pull\/.*/;
+  if (pullPattern.test(url)) {
+    return true;
+  }
+
+  return false;
+}
+
+function isCompareUrl(url) {
+  const comparePattern = /https:\/\/.*\/.*\/compare\/.*/;
+  if (comparePattern.test(url)) {
+    return true;
+  }
+
+  return false;
+}
+
+// 対象URLの判定
+function isTargetUrl(url) {
+  if (isBlobUrl(url) 
+    || isPullUrl(url)
+    || isCompareUrl(url)){
+
+    return true;
+  }
+
   return false;
 }
 
@@ -54,6 +82,20 @@ chrome.runtime.onMessage.addListener(
 
     return true;
   }
+
+  if (message.type === 'pageType') {
+    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, tabs => {
+      const url = tabs[0].url;
+      if (isCompareUrl(url)) {
+        callback('campare');
+      } else {
+        callback('default');
+      }
+    });
+
+    return true;
+  }
+
   return true;
 });
 
