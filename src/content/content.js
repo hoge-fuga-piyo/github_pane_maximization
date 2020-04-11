@@ -82,9 +82,9 @@ function runScript(type) {
 chrome.runtime.sendMessage({type: 'pageType'}, (response) => {
   // アイコンクリック時の挙動
   chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-      if (request == "runScript") {
-          runScript(response);
-      }
+    if (request == "runScript") {
+        runScript(response);
+    }
   }); 
 
   // Paneの最大化/デフォルト切り替え
