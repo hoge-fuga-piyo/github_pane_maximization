@@ -23,6 +23,7 @@
     "https://*/blob/*",
     "https://*/pull/*",
     "https://*/compare/*",
+    "https://*/commit/*",
     "storage"
   ]
 }

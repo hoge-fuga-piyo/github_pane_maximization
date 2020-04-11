@@ -25,11 +25,21 @@ function isCompareUrl(url) {
   return false;
 }
 
+function isCommitUrl(url) {
+  const commitPattern = /https:\/\/.*\/.*\/commit\/.*/;
+  if (commitPattern.test(url)) {
+    return true;
+  }
+
+  return false;
+}
+
 // 対象URLの判定
 function isTargetUrl(url) {
   if (isBlobUrl(url) 
     || isPullUrl(url)
-    || isCompareUrl(url)){
+    || isCompareUrl(url)
+    || isCommitUrl(url)){
 
     return true;
   }
