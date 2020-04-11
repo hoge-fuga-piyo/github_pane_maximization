@@ -81,7 +81,7 @@ function runScript(type) {
 
 chrome.runtime.sendMessage({type: 'pageType'}, (response) => {
   // アイコンクリック時の挙動
-  chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request == "runScript") {
         runScript(response);
     }
