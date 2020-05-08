@@ -14,11 +14,16 @@ function paneMaximizationMode() {
       return;
     }
 
-    $('div.repository-content').parent().css('margin-left', '2%');
-    $('div.repository-content').parent().css('margin-right', '2%');
-    $('div.repository-content').parent().css('max-width', '100%');
-    $('div.repository-content').parent().css('width', 'auto');
-    $('div.repository-content').width('auto');
+    const repositoryContent = document.querySelectorAll('div.repository-content');
+    repositoryContent.forEach((element) => {
+      element.style.width = 'auto';
+      const parent = element.parentNode;
+      parent.style.marginLeft = '2%';
+      parent.style.marginRight = '2%';
+      parent.style.maxWidth = '100%';
+      parent.style.width = 'auto';
+    });
+    console.log(repositoryContent[0].style.width);
   }
 }
 
