@@ -86,7 +86,7 @@ function paneCompareNormalMode() {
   if (fileBucket.length > 0) {
     fileBucket.forEach((element) => {
       const parent = element.parentNode;
-      parent.style.marginLeft = 'atuo';
+      parent.style.marginLeft = 'auto';
       parent.style.marginRight = 'auto';
       parent.style.maxWidth = '1012px';
     });
