@@ -8,13 +8,16 @@ function isMaximization() {
 }
 
 function paneMaximizationMode() {
-  if ($('div').hasClass('repository-content')) {
-    let viewMode = $("meta[name='diff-view']").attr('content');
-    if (viewMode === 'split') {
-      return;
+  const repositoryContent = document.querySelectorAll('div.repository-content');
+  if (repositoryContent.length > 0) {
+    const metaInfo = document.querySelector("meta[name='diff-view']");
+    if (metaInfo !== null) {
+      const viewMode = metaInfo.getAttribute('content');
+      if (viewMode === 'split') {
+        return;
+      }
     }
 
-    const repositoryContent = document.querySelectorAll('div.repository-content');
     repositoryContent.forEach((element) => {
       element.style.width = 'auto';
       const parent = element.parentNode;
@@ -23,7 +26,6 @@ function paneMaximizationMode() {
       parent.style.maxWidth = '100%';
       parent.style.width = 'auto';
     });
-    console.log(repositoryContent[0].style.width);
   }
 }
 
