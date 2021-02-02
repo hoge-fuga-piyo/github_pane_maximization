@@ -54,7 +54,7 @@ function paneNormalMode() {
       const parent = element.parentNode;
       parent.style.marginLeft = 'auto';
       parent.style.marginRight = 'auto';
-      parent.style.maxWidth = '1012px';
+      parent.style.maxWidth = '1280px';
     });
   }
 }
